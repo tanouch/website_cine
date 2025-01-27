@@ -10,10 +10,12 @@ import { TheaterScreenings } from "@/lib/types";
 import { formatMerJJMM, safeDate } from "@/lib/util";
 
 export default function MultiDaySeances({
+  title,
   screenings,
   className,
   groupClassName,
 }: {
+  title: string;
   screenings: { [day: string]: TheaterScreenings[] };
   className?: string;
   groupClassName?: string;
@@ -40,7 +42,7 @@ export default function MultiDaySeances({
         >
           <BodyCopy>{capitalize(formatMerJJMM(safeDate(day)))}</BodyCopy>
           <div className="flex flex-col">
-            <Seances screenings={screeningsTheaters} />
+            <Seances day={day} screenings={screeningsTheaters} title={title} />
           </div>
         </div>
       ))}

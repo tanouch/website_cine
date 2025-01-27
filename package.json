@@ -14,15 +14,22 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@heroicons/react": "^2.0.18",
     "@next/third-parties": "^14.0.1",
+    "@radix-ui/react-dialog": "^1.1.5",
+    "@radix-ui/react-label": "^2.1.1",
+    "@radix-ui/react-slot": "^1.1.1",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@uidotdev/usehooks": "^2.4.1",
+    "add-to-calendar-button-react": "^2.8.1",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",
     "fast-json-stable-stringify": "^2.1.0",
     "firebase": "^10.5.2",
     "framer-motion": "^10.16.8",
+    "immer": "^10.1.1",
     "lodash-es": "^4.17.21",
-    "luxon": "^3.4.4",
+    "lucide-react": "^0.474.0",
+    "luxon": "^3.5.0",
     "next": "14.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -31,6 +38,8 @@
     "server-only": "^0.0.1",
     "sharp": "^0.32.6",
     "swr": "^2.2.4",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7",
     "usehooks-ts": "^2.9.1",
     "zustand": "^4.4.7"
   },
@@ -53,5 +62,6 @@
     "prettier-plugin-tailwindcss": "^0.5.7",
     "tailwindcss": "^3.3.5",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }

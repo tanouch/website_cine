@@ -13,9 +13,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      borderColor: ({ theme }) => ({
-        DEFAULT: theme("colors.retro-gray"),
-      }),
+      borderColor: ({ theme }) => ({ DEFAULT: theme("colors.retro-gray") }),
       borderWidth: {
         DEFAULT: "1.5px",
       },
@@ -40,20 +38,20 @@ const config: Config = {
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji",
         ],
         suisse: [
           "var(--font-suisse)",
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji",
         ],
       },
       fontSize: ALL_PX,
@@ -80,6 +78,6 @@ const config: Config = {
       width: ALL_PX,
     },
   },
-  plugins: [forms],
+  plugins: [forms, require("tailwindcss-animate")],
 };
 export default config;

@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import { sortBy } from "lodash-es";
+import { DateTime } from "luxon";
 import Image from "next/image";
 import Link from "next/link";
 import React, { ReactNode, use, useEffect, useMemo } from "react";
@@ -35,7 +36,7 @@ import coupDeCoeur from "../../assets/coup-de-coeur.png";
 
 export default function MovieTable({
   serverMovies,
-  allMovies,
+  allMovies = false,
   marseille,
 }: {
   serverMovies: Promise<
@@ -54,10 +55,10 @@ export default function MovieTable({
   const events = useCalendrierStore((s) => s.events);
 
   const url = marseille
-    ? allMovies ?? false
+    ? allMovies
       ? `/api/movies/all-by-day-marseille/${formatYYYYMMDD(date)}`
       : `/api/movies/by-day-marseille/${formatYYYYMMDD(date)}`
-    : allMovies ?? false
+    : allMovies
       ? `/api/movies/all-by-day/${formatYYYYMMDD(date)}`
       : `/api/movies/by-day/${formatYYYYMMDD(date)}`;
 
@@ -111,6 +112,7 @@ export default function MovieTable({
               filter,
               events,
             }}
+            date={allMovies ? undefined : date}
           />
         )}
       </SuspenseWithLoading>
@@ -128,6 +130,7 @@ function LoadedTable({
   quartiers,
   filter,
   events,
+  date,
 }: {
   serverMovies: Promise<
     MovieWithScreeningsOneDay[] | MovieWithScreeningsSeveralDays[]
@@ -139,6 +142,7 @@ function LoadedTable({
   quartiers: Quartier[];
   filter: string;
   events: boolean;
+  date?: DateTime;
 }) {
   const serverMovies = use(serverMoviesPromise);
   const movies = useMemo(
@@ -169,7 +173,7 @@ function LoadedTable({
   return sortedFilteredMovies.length == 0 ? (
     <EmptyTableState filter={filter} />
   ) : (
-    <MovieRows movies={sortedFilteredMovies} />
+    <MovieRows date={date} movies={sortedFilteredMovies} />
   );
 }
 
@@ -197,8 +201,10 @@ function EmptyTableState({ filter }: { filter: string }) {
 
 function MovieRows({
   movies,
+  date,
 }: {
   movies: MovieWithScreeningsOneDay[] | MovieWithScreeningsSeveralDays[];
+  date?: DateTime;
 }) {
   return movies.map((movie) => (
     <Row
@@ -210,11 +216,16 @@ function MovieRows({
         <div className="py-12px lg:py-17px">
           {isMovieWithShowtimesSeveralDays(movie) ? (
             <MultiDaySeances
+              title={movie.title}
               screenings={movie.showtimes_by_day}
               className="gap-y-10px"
             />
           ) : (
-            <Seances screenings={movie.showtimes_theater} />
+            <Seances
+              day={checkNotNull(date?.toISODate())}
+              title={movie.title}
+              screenings={movie.showtimes_theater}
+            />
           )}
         </div>
       }

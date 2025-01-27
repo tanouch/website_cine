@@ -1,6 +1,7 @@
 "use client";
 
 import clsx from "clsx";
+import Image from "next/image";
 import Link from "next/link";
 import React, { ReactNode, useState } from "react";
 
@@ -19,6 +20,7 @@ import {
 import { SearchMovie } from "@/lib/types";
 
 import LoadingPage from "../loading";
+import logoBlue from "./logo-blue.png";
 
 function OpenQuestion({
   question,
@@ -202,8 +204,8 @@ function ShareableContent({ rowsData }: ShareableContentProps) {
             <div className="text-30px leading-15px">•</div>
           </div>
           <div className="flex grow items-center justify-center">
-            <img
-              src="/img/logo-blue.png"
+            <Image
+              src={logoBlue}
               alt="Logo"
               className="h-auto w-157px max-w-[50%]"
             />

@@ -7,13 +7,18 @@ import React from "react";
 
 import { transformZipcode } from "@/components/theaters/theaters";
 import { TheaterScreenings } from "@/lib/types";
-import { floatHourToString } from "@/lib/util";
+import { floatHourToString, safeDate } from "@/lib/util";
 
+import { useSeanceDialogStore } from "../seance-dialog/seance-dialog";
 import { CalendrierCopy } from "../typography/typography";
 
 export default function Seances({
+  title,
+  day,
   screenings,
 }: {
+  title: string;
+  day: string;
   screenings: TheaterScreenings[];
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -52,6 +57,8 @@ export default function Seances({
     >
       {(isExpanded ? sortedTheaters : unexpandedTheaters).map((theater) => (
         <SeancesTheater
+          day={day}
+          title={title}
           showtimesTheater={theater}
           key={theater.name}
           isExpanded={isExpanded}
@@ -111,10 +118,14 @@ export function FormatNotes({
   );
 }
 
-export function SeancesTheater({
+function SeancesTheater({
+  title,
+  day,
   showtimesTheater,
   isExpanded,
 }: {
+  title: string;
+  day: string;
   showtimesTheater: TheaterScreenings;
   isExpanded: boolean;
 }) {
@@ -122,6 +133,19 @@ export function SeancesTheater({
     Object.values(showtimesTheater.seances),
     (screening) => screening.time,
   );
+
+  const setSeance = useSeanceDialogStore((s) => s.setSeance);
+  const showDialog = ({ time }: { time: number }) => {
+    const date = safeDate(day).set({
+      hour: Math.floor(time),
+      minute: Number((60 * (time - Math.floor(time))).toPrecision(2)),
+    });
+    setSeance({
+      movieDate: date,
+      movieTheater: showtimesTheater.name,
+      movieTitle: title,
+    });
+  };
 
   return (
     <div
@@ -144,7 +168,12 @@ export function SeancesTheater({
             })}
           >
             <CalendrierCopy className="text-right lg:text-left">
-              {floatHourToString(screening.time)}
+              <button
+                className="underline"
+                onClick={() => showDialog({ time: screening.time })}
+              >
+                {floatHourToString(screening.time)}
+              </button>
               {screening.notes != null && (
                 <span className="text-retro-gray">
                   &nbsp;

@@ -59,6 +59,8 @@ const config: Config = {
       fontSize: ALL_PX,
       gap: ALL_PX,
       gridTemplateColumns: {
+        fillMinHalf: `repeat(auto-fill, minmax(max(40%, ${150 / 16}rem), 1fr))`,
+        fillMin300: `repeat(auto-fill, minmax(${300 / 16}rem, 1fr))`,
         "thumbnails-sm": `repeat(auto-fill, minmax(${300 / 16}rem, 1fr))`,
         "thumbnails-lg": `repeat(auto-fill, minmax(${340 / 16}rem, 1fr))`,
       },

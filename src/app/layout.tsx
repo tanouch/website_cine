@@ -8,6 +8,10 @@ import Footer from "@/components/layout/footer";
 import Newsletter from "@/components/layout/newsletter";
 import TopBar from "@/components/layout/top-bar";
 import MenuWrapper from "@/components/menu/menu-wrapper";
+import {
+  SeanceDialog,
+  SeanceDialogStoreProvider,
+} from "@/components/seance-dialog/seance-dialog";
 
 import "./globals.css";
 
@@ -109,20 +113,23 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             "font-suisse text-retro-black",
           )}
         >
-          <MenuWrapper>
-            <Newsletter />
-            <div className="flex grow flex-col pt-20px lg:pt-0">
-              <div className="flex pb-20px lg:hidden">
-                <TopBar />
-              </div>
-              <div className="flex grow flex-col justify-between">
-                <div className="flex grow flex-col">{children}</div>
-                <div className="flex pt-20px lg:pb-20px lg:pl-20px lg:pt-30px">
-                  <Footer />
+          <SeanceDialogStoreProvider>
+            <SeanceDialog />
+            <MenuWrapper>
+              <Newsletter />
+              <div className="flex grow flex-col pt-20px lg:pt-0">
+                <div className="flex pb-20px lg:hidden">
+                  <TopBar />
+                </div>
+                <div className="flex grow flex-col justify-between">
+                  <div className="flex grow flex-col">{children}</div>
+                  <div className="flex pt-20px lg:pb-20px lg:pl-20px lg:pt-30px">
+                    <Footer />
+                  </div>
                 </div>
               </div>
-            </div>
-          </MenuWrapper>
+            </MenuWrapper>
+          </SeanceDialogStoreProvider>
         </body>
       </html>
     </StrictMode>

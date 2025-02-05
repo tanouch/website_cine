@@ -1,6 +1,6 @@
 "use server";
 
-import _ from "lodash";
+import { filter, flow, map, take } from "lodash-es";
 
 import { getSearchMovies } from "@/lib/movies";
 import { getFields, stringMatchFields } from "@/lib/util";
@@ -16,10 +16,11 @@ export async function search({
   const keywords = getFields(searchTerm);
 
   return searchTerm.length > 0
-    ? _(searchMovies)
-        .filter(([_, fields]) => stringMatchFields(keywords, fields))
-        .map(([elem]) => elem)
-        .take(nbResults)
-        .value()
+    ? flow(
+        (sm) =>
+          filter(sm, ([_, fields]) => stringMatchFields(keywords, fields)),
+        (sm) => map(sm, ([elem]) => elem),
+        (sm) => take(sm, nbResults),
+      )(searchMovies)
     : [];
 }

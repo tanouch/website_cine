@@ -2,7 +2,7 @@ import { every, mapValues, padStart, pickBy, some } from "lodash-es";
 import { DateTime } from "luxon";
 import Image from "next/image";
 import { ComponentProps, useMemo } from "react";
-import { useWindowSize } from "usehooks-ts";
+import { useWindowSize } from "react-use";
 
 import { Quartier } from "@/lib/calendrier-store";
 

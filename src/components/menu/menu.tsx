@@ -1,6 +1,5 @@
 "use client";
 
-import { usePrevious } from "@uidotdev/usehooks";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,6 +18,7 @@ import { useCalendrierStore } from "@/lib/calendrier-store";
 import { closeMenu } from "@/lib/menu-store";
 
 import logoCarre from "../../assets/logo-carre.gif";
+import { usePrevious } from "../../lib/utils";
 import FooterLinks from "../layout/footer-links";
 import { CoeurWithSpacing } from "../typography/typography";
 

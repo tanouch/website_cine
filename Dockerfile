@@ -1,7 +1,7 @@
 FROM node:22-alpine AS base
 
 RUN corepack enable
-RUN corepack prepare pnpm@latest --activate
+RUN corepack prepare pnpm@9.15.4 --activate
 
 # Install dependencies only when needed
 FROM base AS deps

@@ -108,10 +108,12 @@ export function MetaCopy({
   children,
   lowercase,
   size = "default", // add size parameter with "default" as default value
+  className,
 }: {
   children: ReactNode;
   lowercase?: boolean;
   size?: "default" | "small" | "large";
+  className?: string;
 }) {
   const sizeClasses = {
     default: "text-19px lg:text-20px lg:leading-22px",
@@ -127,6 +129,7 @@ export function MetaCopy({
         },
         "font-medium leading-21px text-retro-gray lg:tracking-[-0.01em]",
         sizeClasses[size],
+        className,
       )}
     >
       {children}

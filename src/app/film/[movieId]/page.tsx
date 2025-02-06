@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import { getMovie } from "@/lib/movies";
+import { getMovieDetailsFromTmdb } from "@/lib/tmdb";
 
 import Film from "./film";
 
@@ -30,5 +31,8 @@ export default async function FilmPage(props: {
 }
 
 async function FilmPageLoader({ movieId }: { movieId: string }) {
-  return <Film movie={await getMovie(movieId)} />;
+  const movie = await getMovie(movieId);
+  return (
+    <Film movie={movie} tmdbMovie={await getMovieDetailsFromTmdb(movie)} />
+  );
 }

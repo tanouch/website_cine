@@ -13,6 +13,12 @@ const nextConfig = {
         port: "",
         pathname: "/v0/b/website-cine.appspot.com/o/**",
       },
+      {
+        protocol: "https",
+        hostname: "image.tmdb.org",
+        port: "",
+        pathname: "**",
+      },
     ],
   },
   redirects: async () => [

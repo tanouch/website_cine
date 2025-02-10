@@ -50,15 +50,18 @@ export function SousTitre2({
 export function SectionTitle({
   children,
   className,
+  color = "bg-retro-green", // default value
 }: {
   children: ReactNode;
   className?: string;
+  color?: "bg-retro-green" | "bg-retro-pale-green"; // type union for allowed colors
 }) {
   return (
     <div
       className={clsx(
         className,
-        "flex flex-col border-y bg-retro-green px-10px py-10px text-center text-22px font-semibold uppercase leading-22px tracking-[-0.01em] text-retro-gray lg:py-20px",
+        color,
+        "flex flex-col border-y px-10px py-10px text-center text-22px font-semibold uppercase leading-22px tracking-[-0.01em] text-retro-gray lg:py-20px",
       )}
     >
       <SousTitre2>{children}</SousTitre2>
@@ -69,15 +72,18 @@ export function SectionTitle({
 export function SubsectionTitle({
   children,
   className,
+  align = "text-center", // default to center
 }: {
   children: ReactNode;
   className?: string;
+  align?: "text-center" | "text-left";
 }) {
   return (
     <div
       className={clsx(
         className,
-        "flex flex-col border-y bg-retro-pale-green px-10px py-10px text-center text-20px font-semibold leading-25px tracking-[-0.01em] text-retro-gray",
+        align,
+        "flex flex-col border-y bg-retro-pale-green px-10px py-10px text-20px font-semibold leading-25px tracking-[-0.01em] text-retro-gray",
       )}
     >
       <div>{children}</div>

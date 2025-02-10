@@ -13,8 +13,10 @@ import { CalendrierCopy } from "../typography/typography";
 
 export default function Seances({
   screenings,
+  theaterAlign = "text-left",
 }: {
   screenings: TheaterScreenings[];
+  theaterAlign?: "text-left" | "text-right";
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -53,8 +55,9 @@ export default function Seances({
       {(isExpanded ? sortedTheaters : unexpandedTheaters).map((theater) => (
         <SeancesTheater
           showtimesTheater={theater}
-          key={theater.name}
           isExpanded={isExpanded}
+          key={theater.name}
+          theaterAlign={theaterAlign}
         />
       ))}
       {needsExpanding && (
@@ -114,9 +117,11 @@ export function FormatNotes({
 export function SeancesTheater({
   showtimesTheater,
   isExpanded,
+  theaterAlign = "text-left", // default to left
 }: {
   showtimesTheater: TheaterScreenings;
   isExpanded: boolean;
+  theaterAlign?: "text-left" | "text-right";
 }) {
   const screenings = sortBy(
     Object.values(showtimesTheater.seances),
@@ -128,7 +133,7 @@ export function SeancesTheater({
       className="group/cinema flex items-start justify-between lg:col-span-full lg:grid lg:grid-cols-[subgrid]"
       key={showtimesTheater.name}
     >
-      <div className="grow pr-10px lg:pr-0px">
+      <div className={clsx("grow pr-10px lg:pr-0px", theaterAlign)}>
         <CalendrierCopy
           className={clsx({ "group-hover/cinema:underline": isExpanded })}
         >
